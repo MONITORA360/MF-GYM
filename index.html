@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MF GYM Adulto Mayor: salud funcional, autonomía, bienestar y comunidad en Sogamoso, Boyacá.">
+  <title>MF GYM Adulto Mayor | Tu mejor versión</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    :root{--blue:#005EBF;--cyan:#0BB1EB;--red:#F31927;--ink:#172235;--muted:#64748b}
+    *{scroll-behavior:smooth} body{font-family:'DM Sans',sans-serif;color:var(--ink)}
+    h1,h2,h3,h4{font-family:'Manrope',sans-serif}
+    .brand-blue{color:var(--blue)} .bg-brand{background:var(--blue)} .bg-cyan{background:var(--cyan)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:.9rem 1.25rem;border-radius:999px;font-weight:800;transition:.25s}
+    .btn-primary{background:var(--blue);color:white;box-shadow:0 12px 28px #005ebf30}.btn-primary:hover{background:#004b99;transform:translateY(-2px)}
+    .btn-light{background:white;color:var(--blue)} .btn-outline{border:1.5px solid #ffffffa8;color:white}
+    .section-kicker{font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--cyan)}
+    .hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s ease}
+    .hero-slide.active{opacity:1}
+    .hero-overlay{background:linear-gradient(90deg,rgba(6,22,43,.88),rgba(6,22,43,.56) 58%,rgba(6,22,43,.25))}
+    .glass{background:rgba(255,255,255,.12);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.2)}
+    .soft-shadow{box-shadow:0 18px 55px rgba(15,35,65,.09)}
+    .pillar-card,.service-card{transition:transform .25s,box-shadow .25s}.pillar-card:hover,.service-card:hover{transform:translateY(-6px);box-shadow:0 22px 45px rgba(15,35,65,.12)}
+    .photo{background-size:cover;background-position:center}
+    .modal{display:none}.modal.open{display:flex}
+    .nav-link{font-weight:700;color:#475569;transition:.2s}.nav-link:hover{color:var(--blue)}
+    .step-line:before{content:"";position:absolute;left:1.1rem;top:2.6rem;bottom:-1rem;width:2px;background:#dbeafe}
+    .step:last-child .step-line:before{display:none}
+    .field{width:100%;border:1px solid #dbe3ed;border-radius:14px;padding:.85rem 1rem;outline:none;background:white}
+    .field:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #0bb1eb20}
+    .reveal{opacity:0;transform:translateY(20px);transition:all .65s ease}.reveal.visible{opacity:1;transform:none}
+    .dot{width:9px;height:9px;border-radius:99px;background:#ffffff80}.dot.active{width:26px;background:white}
+    @media(max-width:767px){.hero-overlay{background:linear-gradient(90deg,rgba(6,22,43,.88),rgba(6,22,43,.62))}}
+  </style>
+</head>
+<body class="bg-white">
+  <!-- Barra de navegación -->
+  <header class="fixed top-0 inset-x-0 z-40 bg-white/95 backdrop-blur-lg border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 h-[78px] flex items-center justify-between">
+      <a href="#inicio" class="flex items-center gap-3 min-w-0">
+        <img src="logogym.jpg" alt="Logo MF GYM Adulto Mayor" class="h-14 w-14 object-contain rounded-xl" onerror="this.style.display='none';document.getElementById('logoFallback').style.display='grid'">
+        <span id="logoFallback" class="hidden h-12 w-12 rounded-xl bg-brand text-white place-items-center font-extrabold">MF</span>
+        <span class="leading-tight"><strong class="block text-lg md:text-xl tracking-tight">MF GYM</strong><small class="block text-[10px] md:text-xs font-bold tracking-[.14em] text-slate-500 uppercase">Adulto Mayor</small></span>
+      </a>
+      <nav class="hidden lg:flex items-center gap-7">
+        <a class="nav-link" href="#nosotros">Nosotros</a><a class="nav-link" href="#pilares">Pilares</a>
+        <a class="nav-link" href="#servicios">Servicios</a><a class="nav-link" href="#metodologia">Metodología</a>
+        <a class="nav-link" href="#contacto">Contacto</a>
+      </nav>
+      <a href="#inscripcion" class="btn btn-primary text-sm hidden sm:inline-flex">Inscríbete <i class="fa-solid fa-arrow-right"></i></a>
+      <button id="menuBtn" class="lg:hidden text-2xl text-slate-700 p-2" aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    <nav id="mobileMenu" class="hidden lg:hidden px-6 pb-5 bg-white border-t border-slate-100">
+      <div class="grid gap-4 py-3"><a class="nav-link" href="#nosotros">Nosotros</a><a class="nav-link" href="#pilares">Pilares</a><a class="nav-link" href="#servicios">Servicios</a><a class="nav-link" href="#metodologia">Metodología</a><a class="nav-link" href="#contacto">Contacto</a><a class="btn btn-primary" href="#inscripcion">Inscríbete ahora</a></div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Banner carrusel -->
+    <section id="inicio" class="relative min-h-[690px] md:min-h-[760px] flex items-center overflow-hidden bg-slate-900 pt-20">
+      <div class="hero-slide active" style="background-image:url('foto10.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('foto6.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('foto11.jpeg')"></div>
+      <div class="absolute inset-0 hero-overlay"></div>
+      <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-8 w-full py-20">
+        <div class="max-w-3xl text-white">
+          <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 text-sm font-bold mb-7"><span class="w-2 h-2 rounded-full bg-cyan-300"></span> Bienestar especializado en Sogamoso, Boyacá</div>
+          <p class="text-cyan-300 font-extrabold tracking-[.2em] uppercase text-xs md:text-sm mb-4">Movimiento · Autonomía · Comunidad</p>
+          <h1 class="text-5xl md:text-7xl font-extrabold leading-[1.04] tracking-tight">Tu independencia,<br><span class="text-cyan-300">tu comunidad,</span><br>tu mejor versión.</h1>
+          <p class="text-lg md:text-xl text-white/85 leading-relaxed mt-7 max-w-2xl">Un espacio especializado donde la salud funcional y el bienestar social se encuentran para transformar cada día en una oportunidad de vivir con plenitud.</p>
+          <div class="flex flex-col sm:flex-row gap-3 mt-9">
+            <a href="#inscripcion" class="btn btn-primary bg-white !text-[#005EBF]">Quiero conocer MF GYM <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#servicios" class="btn btn-outline">Explorar servicios</a>
+          </div>
+          <div class="grid grid-cols-3 gap-3 max-w-xl mt-12">
+            <div class="glass rounded-2xl p-3 md:p-4"><i class="fa-solid fa-person-circle-check text-cyan-300 text-xl"></i><strong class="block mt-2 text-sm md:text-base">Atención</strong><span class="text-xs text-white/70">Personalizada</span></div>
+            <div class="glass rounded-2xl p-3 md:p-4"><i class="fa-solid fa-heart-pulse text-cyan-300 text-xl"></i><strong class="block mt-2 text-sm md:text-base">Salud</strong><span class="text-xs text-white/70">Funcional</span></div>
+            <div class="glass rounded-2xl p-3 md:p-4"><i class="fa-solid fa-people-group text-cyan-300 text-xl"></i><strong class="block mt-2 text-sm md:text-base">Conexión</strong><span class="text-xs text-white/70">Y comunidad</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="absolute z-10 bottom-8 right-8 flex gap-2" id="heroDots"><button class="dot active" aria-label="Diapositiva 1"></button><button class="dot" aria-label="Diapositiva 2"></button><button class="dot" aria-label="Diapositiva 3"></button></div>
+      <div class="absolute z-10 bottom-8 left-1/2 -translate-x-1/2 text-white/70 text-xs tracking-widest hidden md:block">DESLIZA PARA DESCUBRIR <i class="fa-solid fa-arrow-down ml-2"></i></div>
+    </section>
+
+    <!-- Manifiesto -->
+    <section id="nosotros" class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-14 items-center">
+        <div class="relative reveal">
+          <img src="foto10.jpeg" alt="Experiencia y bienestar en MF GYM" class="w-full h-[440px] object-cover rounded-[2rem] soft-shadow" onerror="this.src='https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=85'">
+          <div class="absolute -bottom-7 -right-3 md:right-[-25px] bg-brand text-white p-6 rounded-2xl max-w-[230px] shadow-xl"><i class="fa-solid fa-sun text-2xl text-cyan-300"></i><p class="font-extrabold text-xl mt-3">Vivir con plenitud</p><p class="text-sm text-white/75 mt-1">Cada etapa de la vida merece movimiento, propósito y alegría.</p></div>
+        </div>
+        <div class="reveal">
+          <p class="section-kicker">Nuestro manifiesto</p><h2 class="text-4xl md:text-5xl font-extrabold mt-4 leading-tight">Envejecer no significa <span class="brand-blue">renunciar.</span></h2>
+          <p class="text-slate-600 text-lg leading-relaxed mt-6">En MF GYM Adulto Mayor no creemos en envejecer sintiendo limitaciones; creemos en vivir con plenitud, autonomía y alegría. Somos un centro especializado donde la salud funcional y el bienestar social se encuentran para transformar el día a día de nuestros usuarios.</p>
+          <div class="mt-8 space-y-6">
+            <div class="flex gap-4"><span class="w-11 h-11 shrink-0 rounded-xl bg-blue-50 text-brand grid place-items-center"><i class="fa-solid fa-bullseye"></i></span><div><h3 class="font-extrabold text-lg">Nuestra misión</h3><p class="text-slate-600 leading-relaxed mt-1">Brindar programas integrales preventivos, correctivos y de mantenimiento orientados a preservar la independencia funcional, elevando la calidad de vida mediante atención profesional, personalizada y cálida.</p></div></div>
+            <div class="flex gap-4"><span class="w-11 h-11 shrink-0 rounded-xl bg-cyan-50 text-cyan-600 grid place-items-center"><i class="fa-solid fa-eye"></i></span><div><h3 class="font-extrabold text-lg">Nuestra visión</h3><p class="text-slate-600 leading-relaxed mt-1">Consolidarnos como el centro líder de acondicionamiento físico adaptado, bienestar integral y estimulación creativa en Boyacá, reconocido por el impacto real en la salud física y emocional de nuestra comunidad.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pilares -->
+    <section id="pilares" class="py-24 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto reveal"><p class="section-kicker">Nuestro modelo</p><h2 class="text-4xl md:text-5xl font-extrabold mt-4">Cuatro pilares para una vida <span class="brand-blue">más plena.</span></h2><p class="text-slate-600 text-lg mt-5">El bienestar requiere un enfoque multidimensional: el cuerpo, la mente y los vínculos sociales van de la mano. Explora cada pilar.</p></div>
+        <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-5 mt-14">
+          <button class="pillar-card text-left bg-white rounded-3xl overflow-hidden soft-shadow" data-pillar="0"><img src="foto1.jpeg" alt="Salud funcional terapéutica" class="h-48 w-full object-cover"><div class="p-6"><span class="text-xs font-extrabold text-cyan-600">01 · CUERPO</span><h3 class="font-extrabold text-xl mt-2">Salud funcional terapéutica</h3><p class="text-slate-500 text-sm mt-3">Fuerza, movilidad, equilibrio y seguridad para la vida diaria.</p><span class="inline-flex items-center gap-2 text-brand font-extrabold text-sm mt-5">Descubrir pilar <i class="fa-solid fa-arrow-right"></i></span></div></button>
+          <button class="pillar-card text-left bg-white rounded-3xl overflow-hidden soft-shadow" data-pillar="1"><img src="foto3.jpeg" alt="Comunidad e integración social" class="h-48 w-full object-cover"><div class="p-6"><span class="text-xs font-extrabold text-cyan-600">02 · CONEXIÓN</span><h3 class="font-extrabold text-xl mt-2">Comunidad e integración social</h3><p class="text-slate-500 text-sm mt-3">Vínculos afectivos, pertenencia y motivación para compartir.</p><span class="inline-flex items-center gap-2 text-brand font-extrabold text-sm mt-5">Descubrir pilar <i class="fa-solid fa-arrow-right"></i></span></div></button>
+          <button class="pillar-card text-left bg-white rounded-3xl overflow-hidden soft-shadow" data-pillar="2"><img src="foto12.jpeg" alt="Estimulación cognitiva y creativa" class="h-48 w-full object-cover"><div class="p-6"><span class="text-xs font-extrabold text-cyan-600">03 · MENTE</span><h3 class="font-extrabold text-xl mt-2">Estimulación cognitiva y creativa</h3><p class="text-slate-500 text-sm mt-3">Creatividad, memoria, concentración y nuevos hobbies.</p><span class="inline-flex items-center gap-2 text-brand font-extrabold text-sm mt-5">Descubrir pilar <i class="fa-solid fa-arrow-right"></i></span></div></button>
+          <button class="pillar-card text-left bg-white rounded-3xl overflow-hidden soft-shadow" data-pillar="3"><img src="foto5.jpeg" alt="Conexión con la naturaleza y vitalidad" class="h-48 w-full object-cover"><div class="p-6"><span class="text-xs font-extrabold text-cyan-600">04 · VITALIDAD</span><h3 class="font-extrabold text-xl mt-2">Naturaleza y vitalidad</h3><p class="text-slate-500 text-sm mt-3">Experiencias al aire libre, hidroterapia y bienestar.</p><span class="inline-flex items-center gap-2 text-brand font-extrabold text-sm mt-5">Descubrir pilar <i class="fa-solid fa-arrow-right"></i></span></div></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Servicios dinámicos -->
+    <section id="servicios" class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="max-w-3xl reveal"><p class="section-kicker">Oferta integrada</p><h2 class="text-4xl md:text-5xl font-extrabold mt-4">Un plan integral para <span class="brand-blue">disfrutar más.</span></h2><p class="text-slate-600 text-lg mt-5">Programas que combinan movimiento, creatividad y experiencias para acompañar diferentes necesidades y objetivos.</p></div>
+        <div class="flex flex-wrap gap-2 mt-10" id="serviceTabs">
+          <button class="service-tab btn btn-primary text-sm" data-tab="0">Salud funcional</button><button class="service-tab btn bg-slate-100 text-slate-600 text-sm" data-tab="1">Mente y arte</button><button class="service-tab btn bg-slate-100 text-slate-600 text-sm" data-tab="2">Aire libre y social</button>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-10 items-center mt-8">
+          <div class="relative"><img id="serviceImage" src="foto6.jpeg" alt="Programas de salud funcional" class="w-full h-[390px] object-cover rounded-[2rem] soft-shadow"><div class="absolute bottom-5 left-5 bg-white/95 rounded-2xl px-5 py-4"><p class="text-xs font-extrabold text-cyan-600 uppercase tracking-wider">MF GYM · Programa integral</p><p id="serviceImageCaption" class="font-extrabold text-lg mt-1">Movimiento seguro y adaptado</p></div></div>
+          <div id="serviceContent" class="space-y-4"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Metodología -->
+    <section id="metodologia" class="py-24 bg-[#071d36] text-white relative overflow-hidden">
+      <div class="absolute -right-20 -top-24 w-96 h-96 rounded-full border-[60px] border-white/5"></div>
+      <div class="max-w-7xl mx-auto px-5 lg:px-8 relative">
+        <div class="grid lg:grid-cols-2 gap-14 items-center">
+          <div class="reveal"><p class="section-kicker !text-cyan-300">Atención segura y personalizada</p><h2 class="text-4xl md:text-5xl font-extrabold mt-4">Cada persona tiene su propio <span class="text-cyan-300">camino.</span></h2><p class="text-white/70 text-lg leading-relaxed mt-6">Aplicamos un protocolo de cinco etapas para orientar la atención, acompañar el proceso y comunicar los avances a las familias.</p><img src="foto13.jpg" alt="Acompañamiento profesional" class="w-full h-56 object-cover rounded-3xl mt-8 opacity-90" onerror="this.style.display='none'"></div>
+          <div class="space-y-7">
+            <div class="step relative flex gap-5"><div class="step-line relative z-10 w-10 h-10 rounded-xl bg-cyan-400 text-[#071d36] font-extrabold grid place-items-center shrink-0">01</div><div><h3 class="font-extrabold text-xl">Diagnóstico y valoración inicial</h3><p class="text-white/65 mt-1">Evaluación médica/terapéutica previa.</p></div></div>
+            <div class="step relative flex gap-5"><div class="step-line relative z-10 w-10 h-10 rounded-xl bg-white/10 text-cyan-300 font-extrabold grid place-items-center shrink-0">02</div><div><h3 class="font-extrabold text-xl">Diseño a la medida</h3><p class="text-white/65 mt-1">Asignación del plan preventivo, correctivo o de mantenimiento según metas y capacidades.</p></div></div>
+            <div class="step relative flex gap-5"><div class="step-line relative z-10 w-10 h-10 rounded-xl bg-white/10 text-cyan-300 font-extrabold grid place-items-center shrink-0">03</div><div><h3 class="font-extrabold text-xl">Ejecución asistida</h3><p class="text-white/65 mt-1">Acompañamiento profesional permanente en cada clase o taller.</p></div></div>
+            <div class="step relative flex gap-5"><div class="step-line relative z-10 w-10 h-10 rounded-xl bg-white/10 text-cyan-300 font-extrabold grid place-items-center shrink-0">04</div><div><h3 class="font-extrabold text-xl">Seguimiento continuo</h3><p class="text-white/65 mt-1">Evaluación periódica de fuerza, equilibrio y estado de ánimo.</p></div></div>
+            <div class="step relative flex gap-5"><div class="step-line relative z-10 w-10 h-10 rounded-xl bg-white/10 text-cyan-300 font-extrabold grid place-items-center shrink-0">05</div><div><h3 class="font-extrabold text-xl">Comunicación familiar</h3><p class="text-white/65 mt-1">Retroalimentación constante sobre los avances del usuario.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Propuesta de valor -->
+    <section class="py-24 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="reveal"><p class="section-kicker">Nuestra propuesta de valor</p><h2 class="text-4xl md:text-5xl font-extrabold mt-4">No son horas de gimnasio. <span class="brand-blue">Es calidad de vida.</span></h2><p class="text-slate-600 text-lg mt-6">Creamos un entorno donde cada persona puede moverse con confianza, aprender, compartir y disfrutar experiencias memorables.</p>
+            <div class="grid sm:grid-cols-2 gap-5 mt-9">
+              <div class="flex gap-3"><i class="fa-solid fa-shield-heart text-cyan-500 text-xl mt-1"></i><div><h3 class="font-extrabold">Espacios seguros</h3><p class="text-sm text-slate-500 mt-1">Instalaciones amigables y acondicionadas para la movilidad.</p></div></div>
+              <div class="flex gap-3"><i class="fa-solid fa-user-doctor text-cyan-500 text-xl mt-1"></i><div><h3 class="font-extrabold">Equipo humano</h3><p class="text-sm text-slate-500 mt-1">Personal capacitado y comprometido con el cuidado.</p></div></div>
+              <div class="flex gap-3"><i class="fa-solid fa-heart text-cyan-500 text-xl mt-1"></i><div><h3 class="font-extrabold">Impacto holístico</h3><p class="text-sm text-slate-500 mt-1">Movimiento, arte, amigos y experiencias compartidas.</p></div></div>
+              <div class="flex gap-3"><i class="fa-solid fa-calendar-check text-cyan-500 text-xl mt-1"></i><div><h3 class="font-extrabold">Planes flexibles</h3><p class="text-sm text-slate-500 mt-1">Modalidades mensuales, por sesiones o combinadas.</p></div></div>
+            </div>
+          </div>
+          <img src="foto20.jpeg" alt="Comunidad MF GYM" class="w-full h-[470px] object-cover rounded-[2rem] soft-shadow reveal" onerror="this.src='https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1200&q=85'">
+        </div>
+      </div>
+    </section>
+
+    <!-- Inscripción y contacto -->
+    <section id="inscripcion" class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="rounded-[2rem] overflow-hidden bg-brand grid lg:grid-cols-5 soft-shadow">
+          <div class="lg:col-span-2 p-8 md:p-12 text-white flex flex-col justify-between">
+            <div><p class="text-cyan-300 font-extrabold text-xs tracking-[.18em] uppercase">Da el primer paso</p><h2 class="text-4xl md:text-5xl font-extrabold mt-4 leading-tight">Una nueva motivación te espera.</h2><p class="text-white/75 mt-6 leading-relaxed">Haz que tus mañanas —o las de tus padres— cobren una nueva motivación. Ven a conocer nuestras instalaciones, tómate un café con nosotros y vive la experiencia de la primera sesión diagnóstica sin costo.</p></div>
+            <div class="mt-12 space-y-5">
+              <div class="flex gap-4 items-center"><span class="w-11 h-11 rounded-xl bg-white/15 grid place-items-center text-cyan-300"><i class="fa-solid fa-location-dot"></i></span><div><small class="text-white/60 block">Visítanos</small><strong>Calle 19A # 9-60, Sogamoso, Boyacá</strong></div></div>
+              <div class="flex gap-4 items-center"><span class="w-11 h-11 rounded-xl bg-white/15 grid place-items-center text-cyan-300"><i class="fa-brands fa-whatsapp"></i></span><div><small class="text-white/60 block">WhatsApp / Teléfono</small><strong>+57 314 239 4741</strong></div></div>
+              <div class="flex gap-4 items-center"><span class="w-11 h-11 rounded-xl bg-white/15 grid place-items-center text-cyan-300"><i class="fa-regular fa-envelope"></i></span><div><small class="text-white/60 block">Correo electrónico</small><strong class="break-all">mafecruzdias7@gmail.com</strong></div></div>
+            </div>
+          </div>
+          <div class="lg:col-span-3 bg-white p-8 md:p-12">
+            <p class="section-kicker">Formulario de inscripción</p><h3 class="text-3xl font-extrabold mt-3">Cuéntanos sobre ti</h3><p class="text-slate-500 mt-2">Completa tus datos y envíanos la información directamente por WhatsApp.</p>
+            <form id="registrationForm" class="grid sm:grid-cols-2 gap-5 mt-8">
+              <div class="sm:col-span-2"><label class="block text-sm font-bold mb-2" for="nombre">Nombre completo *</label><input class="field" id="nombre" name="nombre" required placeholder="Nombre y apellidos"></div>
+              <div><label class="block text-sm font-bold mb-2" for="sexo">Sexo *</label><select class="field" id="sexo" name="sexo" required><option value="">Selecciona una opción</option><option>Femenino</option><option>Masculino</option><option>Prefiero no indicarlo</option></select></div>
+              <div><label class="block text-sm font-bold mb-2" for="edad">Edad *</label><input class="field" id="edad" name="edad" type="number" min="1" max="120" required placeholder="Edad en años"></div>
+              <div class="sm:col-span-2"><label class="block text-sm font-bold mb-2" for="direccion">Dirección *</label><input class="field" id="direccion" name="direccion" required placeholder="Dirección de residencia"></div>
+              <div class="sm:col-span-2"><label class="block text-sm font-bold mb-2" for="celular">Número celular de contacto *</label><input class="field" id="celular" name="celular" type="tel" required placeholder="Ej. 300 123 4567"></div>
+              <div class="sm:col-span-2"><label class="block text-sm font-bold mb-2" for="adicional">Información adicional <span class="font-normal text-slate-400">(opcional)</span></label><textarea class="field" id="adicional" name="adicional" rows="3" placeholder="Cuéntanos si tienes algún objetivo, interés o información que debamos conocer."></textarea></div>
+              <div class="sm:col-span-2 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between"><p class="text-xs text-slate-400 max-w-xs">Al enviar, se abrirá WhatsApp con los datos que diligenciaste para que puedas confirmar el envío.</p><button type="submit" class="btn btn-primary w-full sm:w-auto">Enviar por WhatsApp <i class="fa-brands fa-whatsapp"></i></button></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contacto" class="bg-[#071d36] text-white py-10">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 flex flex-col md:flex-row gap-6 justify-between items-center">
+      <div class="flex items-center gap-3"><div class="w-12 h-12 rounded-xl bg-white grid place-items-center text-brand font-extrabold">MF</div><div><strong class="text-lg">MF GYM Adulto Mayor</strong><p class="text-white/55 text-sm">Tu independencia, tu comunidad, tu mejor versión.</p></div></div>
+      <div class="flex flex-wrap gap-5 text-sm text-white/70"><a href="#nosotros" class="hover:text-cyan-300">Nosotros</a><a href="#servicios" class="hover:text-cyan-300">Servicios</a><a href="#inscripcion" class="hover:text-cyan-300">Inscripción</a><a href="mailto:mafecruzdias7@gmail.com" class="hover:text-cyan-300">Correo</a></div>
+      <a href="https://wa.me/573142394741" target="_blank" rel="noopener" class="w-12 h-12 rounded-full bg-[#25D366] grid place-items-center text-xl"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 mt-8 pt-6 border-t border-white/10 text-center text-xs text-white/40">© <span id="year"></span> MF GYM Adulto Mayor · Sogamoso, Boyacá</div>
+  </footer>
+
+  <!-- Modal de pilares -->
+  <div id="pillarModal" class="modal fixed inset-0 z-50 items-center justify-center bg-slate-950/70 p-4" role="dialog" aria-modal="true">
+    <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative">
+      <button id="closeModal" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/90 text-slate-800 grid place-items-center" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <img id="modalImage" src="" alt="" class="w-full h-64 object-cover"><div class="p-7 md:p-9"><p id="modalKicker" class="section-kicker"></p><h3 id="modalTitle" class="text-3xl font-extrabold mt-2"></h3><p id="modalDescription" class="text-slate-600 leading-relaxed mt-4"></p><p id="modalImpact" class="mt-5 p-4 bg-blue-50 rounded-2xl text-brand font-bold"></p></div>
+    </div>
+  </div>
+
+  <a href="https://wa.me/573142394741" target="_blank" rel="noopener" class="fixed bottom-5 right-5 z-30 w-14 h-14 rounded-full bg-[#25D366] text-white text-2xl grid place-items-center shadow-xl hover:scale-105 transition" aria-label="Contactar por WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+  <script>
+    // Carrusel del encabezado
+    const slides=[...document.querySelectorAll('.hero-slide')], dots=[...document.querySelectorAll('.dot')]; let current=0;
+    function showSlide(i){current=i;slides.forEach((s,n)=>s.classList.toggle('active',n===i));dots.forEach((d,n)=>d.classList.toggle('active',n===i))}
+    dots.forEach((d,i)=>d.addEventListener('click',()=>showSlide(i)));setInterval(()=>showSlide((current+1)%slides.length),5500);
+
+    // Menú móvil
+    document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('hidden'));
+    document.querySelectorAll('#mobileMenu a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('hidden')));
+
+    // Contenido emergente de los pilares
+    const pillars=[
+      {title:'Salud funcional terapéutica',kicker:'01 · Cuerpo y autonomía',image:'foto1.jpeg',description:'Prescripción individualizada del ejercicio según la condición previa de cada persona. Integra prevención de caídas y acondicionamiento musculoesquelético.',impact:'Impacto esperado: seguridad en los movimientos diarios, menor dolor muscular y recuperación de la fuerza.'},
+      {title:'Comunidad e integración social',kicker:'02 · Vínculos y pertenencia',image:'foto3.jpeg',description:'Espacios diseñados para compartir con personas de la misma generación, crear relaciones y romper la soledad no deseada.',impact:'Impacto esperado: lazos afectivos, sentido de pertenencia y motivación diaria para salir de casa.'},
+      {title:'Estimulación cognitiva y creativa',kicker:'03 · Mente activa',image:'foto12.jpeg',description:'Talleres artísticos como pintura y manualidades, junto con actividades de enfoque mental que invitan a descubrir nuevas capacidades.',impact:'Impacto esperado: estimulación de la plasticidad cerebral, nuevos hobbies y autoestima.'},
+      {title:'Conexión con la naturaleza y vitalidad',kicker:'04 · Aire libre y bienestar',image:'foto5.jpeg',description:'Hidroterapia, caminatas ecológicas y salidas recreativas adaptadas para disfrutar experiencias fuera de la rutina.',impact:'Impacto esperado: vitalidad, bienestar respiratorio y experiencias memorables.'}
+    ];
+    const modal=document.getElementById('pillarModal');
+    document.querySelectorAll('[data-pillar]').forEach(card=>card.addEventListener('click',()=>{const p=pillars[Number(card.dataset.pillar)];document.getElementById('modalImage').src=p.image;document.getElementById('modalImage').alt=p.title;document.getElementById('modalKicker').textContent=p.kicker;document.getElementById('modalTitle').textContent=p.title;document.getElementById('modalDescription').textContent=p.description;document.getElementById('modalImpact').textContent=p.impact;modal.classList.add('open');document.body.style.overflow='hidden'}));
+    function closeModal(){modal.classList.remove('open');document.body.style.overflow=''}document.getElementById('closeModal').addEventListener('click',closeModal);modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+    // Oferta de servicios con pestañas
+    const services=[
+      {image:'foto6.jpeg',caption:'Movimiento seguro y adaptado',items:[
+        ['Valoración física e integral de entrada','Diagnóstico de movilidad, fuerza, equilibrio e historial de salud para orientar la prescripción médica y funcional del ejercicio.','fa-clipboard-check'],
+        ['Acondicionamiento y gimnasio personalizado','Sesiones de bajo y medio impacto en máquinas y espacios adaptados, dirigidas por profesionales capacitados.','fa-dumbbell'],
+        ['Movilidad, flexibilidad y equilibrio','Prevención activa de caídas, fortalecimiento del core y postura con bandas elásticas, balones de pilates y pesas adaptadas.','fa-person-walking'],
+        ['Programas de manejo especializado','Ejercicio dosificado para personas con hipertensión, diabetes o requerimientos de recuperación funcional y cardíaca.','fa-heart-pulse']
+      ]},
+      {image:'foto19.jpeg',caption:'Creatividad, memoria y expresión',items:[
+        ['Taller de expresión artística y pintura','Clases grupales para desarrollar motricidad fina y creatividad a través de pintura en lienzo, cerámica y manualidades.','fa-palette'],
+        ['Neuro-activación y ludoterapia','Juegos y actividades grupales que estimulan la memoria, la concentración y la agilidad mental.','fa-brain']
+      ]},
+      {image:'foto11.jpeg',caption:'Experiencias para compartir',items:[
+        ['Caminatas ecológicas adaptadas','Rutas seguras por senderos naturales que fomentan el acondicionamiento aeróbico suave y la convivencia.','fa-tree'],
+        ['Hidroterapia y acondicionamiento acuático','Ejercicio de impacto cero en agua para liberar tensión articular y relajar la musculatura.','fa-water'],
+        ['Encuentro generacional y recreación','Salidas culturales, celebraciones y dinámicas diseñadas para compartir, reír y disfrutar el tiempo libre entre pares.','fa-people-group']
+      ]}
+    ];
+    function renderServices(index){const s=services[index];document.getElementById('serviceImage').src=s.image;document.getElementById('serviceImageCaption').textContent=s.caption;document.getElementById('serviceContent').innerHTML=s.items.map((it,i)=>`<article class="service-card flex gap-4 p-5 rounded-2xl border border-slate-100 bg-white"><span class="w-12 h-12 rounded-xl bg-blue-50 text-brand grid place-items-center shrink-0 text-xl"><i class="fa-solid ${it[2]}"></i></span><div><h3 class="font-extrabold text-lg">${it[0]}</h3><p class="text-slate-500 leading-relaxed mt-1">${it[1]}</p></div></article>`).join('')}
+    document.querySelectorAll('.service-tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.service-tab').forEach(b=>{b.className='service-tab btn bg-slate-100 text-slate-600 text-sm'});btn.className='service-tab btn btn-primary text-sm';renderServices(Number(btn.dataset.tab))}));renderServices(0);
+
+    // Inscripción: validación y apertura de WhatsApp con los datos
+    document.getElementById('registrationForm').addEventListener('submit',e=>{e.preventDefault();const f=e.currentTarget;if(!f.reportValidity())return;const v=id=>document.getElementById(id).value.trim();const msg=`Hola, MF GYM. Quiero solicitar información sobre la inscripción.%0A%0A*Datos personales*%0ANombre: ${encodeURIComponent(v('nombre'))}%0ASexo: ${encodeURIComponent(v('sexo'))}%0AEdad: ${encodeURIComponent(v('edad'))}%0ADirección: ${encodeURIComponent(v('direccion'))}%0ACelular: ${encodeURIComponent(v('celular'))}%0AInformación adicional: ${encodeURIComponent(v('adicional')||'No registra')}`;window.open('https://wa.me/573142394741?text='+msg,'_blank','noopener')});
+    // Aparición progresiva de secciones
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+    document.getElementById('year').textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
